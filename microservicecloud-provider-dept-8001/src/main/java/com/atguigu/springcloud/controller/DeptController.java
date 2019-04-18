@@ -31,6 +31,10 @@ public class DeptController {
         return service.list();
     }
 
+    /**
+     * 服务发现 DiscoveryClient
+     * @return
+     */
     @GetMapping(value = "/dept/discovery")
     public Object discovery() {
         List<String> list = client.getServices();
