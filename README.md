@@ -65,3 +65,9 @@ Feign旨在使编写Java Http客户端变得更容易。
 该请求发送给Eureka服务器（http://MICROSERVICECLOUD-DEPT/dept/list）,
 - 通过Feign直接找到服务接口，由于在进行服务调用的时候融合了Ribbon技术，所以也支持负载均衡作用。  
 ![Feign程序流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Ribbon%E8%87%AA%E5%B8%A6%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5.png)  
+Controller层实现 Api服务的service接口  
+主启动类加  
+@EnableFeignClients(basePackages = {"com.atguigu.springcloud"})  
+@ComponentScan("com.atguigu.springcloud")注解   
+Api服务的service接口加   
+@FeignClient(value = "MICROSERVICECLOUD-DEPT")注解
