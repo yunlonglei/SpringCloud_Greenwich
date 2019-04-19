@@ -64,4 +64,4 @@ Feign旨在使编写Java Http客户端变得更容易。
   Feign通过接口的方法调用Rest服务（之前是Ribbon+RestTemplate），
 该请求发送给Eureka服务器（http://MICROSERVICECLOUD-DEPT/dept/list）,
 - 通过Feign直接找到服务接口，由于在进行服务调用的时候融合了Ribbon技术，所以也支持负载均衡作用。  
-![Feign程序流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Ribbon%E8%87%AA%E5%B8%A6%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5.png)  
+![Feign程序流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Feign%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.jpg)  
