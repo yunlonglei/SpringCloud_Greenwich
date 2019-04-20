@@ -14,8 +14,8 @@ micoservicercloud-provide-dept-8003  | 微服务落地的服务提供者   | 800
 microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接口且以声明式的方法实现 | 和80相同，只启动一个
 microservicecloud-provider-dept-hystrix-8001 | Hystrix断路器：服务熔断、降级 | 同8001服务提供者 
 
-  *Feign_80（客户端）调用-> api.service  
-  *hystrix_8001（服务端）被 _80（客户端调用）
+  *服务降级Feign_80（客户端）调用-> api.service  
+  *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
 ## Ribbon自带的负载均衡策略  
 ### Spring Cloud Ribbon介绍  
 **Spring Cloud Ribbon**是一个基于HTTP和TCP的客户端负载均衡工具，它基于NetFlix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST请求自动转换为客户端负载均衡的服务调用。
@@ -90,8 +90,11 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 修改主启动类DeptProvider8001_Hystrix_App并添加新注解[**@EnableCircuitBreaker**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/DeptProvider8001_Hystrix_App.java)  
 ![服务熔断](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD.png)  
 ### 服务降级  
-整体资源快不够了，忍痛将某些服务先关掉，待渡过难关，再开启回来。(服务降级处理是在客户端实现完成的，与服务端没有关系)  
-服务降级处理是在客户端实现完成的，与服务端没有关系  
- FallbackFactory接口的类[**DeptClientServiceFallbackFactory**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientServiceFallbackFactory.java),千万不要忘记在类上面新增@Component注解，大坑！！！  
- [**DeptClientService**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)接口在注解@FeignClient中添加fallbackFactory属性值  
+
+整体资源快不够了，忍痛将某些服务先关掉，待渡过难关，再开启回来。(服务降级处理是在客户端实现完成的，与服务端没有关系)。    
+服务降级处理是在客户端实现完成的，与服务端没有关系。  
+ FallbackFactory接口的类[**DeptClientServiceFallbackFactory**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientServiceFallbackFactory.java),千万不要忘记在类上面新增`@Component`注解，大坑！！！  
+ //@FeignClient(value = "MICROSERVICECLOUD-DEPT")//Fegin负载均衡用  
+ //下面这个注解是服务降级Hystrix用，配合了Fegin      
+ [**DeptClientService接口在注解@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)中添加`fallbackFactory`属性值!   
 ![服务降级](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7.png)  

@@ -18,7 +18,8 @@ import java.util.List;
  * 一个实现了FallbackFactory接口的类DeptClientServiceFallbackFactory
  * @date 2018年4月21日
  */
-//@FeignClient(value = "MICROSERVICECLOUD-DEPT")
+//@FeignClient(value = "MICROSERVICECLOUD-DEPT")//Fegin负载均衡用
+//下面这个注解是服务降级Hystrix用，配合了Fegin
 @FeignClient(value = "MICROSERVICECLOUD-DEPT", fallbackFactory = DeptClientServiceFallbackFactory.class)
 public interface DeptClientService {
     @RequestMapping(value = "/dept/get/{id}", method = RequestMethod.GET)
