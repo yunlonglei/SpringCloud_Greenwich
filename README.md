@@ -14,6 +14,8 @@ micoservicercloud-provide-dept-8003  | 微服务落地的服务提供者   | 800
 microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接口且以声明式的方法实现 | 和80相同，只启动一个
 microservicecloud-provider-dept-hystrix-8001 | Hystrix断路器：服务熔断、降级 | 同8001服务提供者 
 
+  *Feign_80（客户端）调用-> api.service  
+  *hystrix_8001（服务端）被 _80（客户端调用）
 ## Ribbon自带的负载均衡策略  
 ### Spring Cloud Ribbon介绍  
 **Spring Cloud Ribbon**是一个基于HTTP和TCP的客户端负载均衡工具，它基于NetFlix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST请求自动转换为客户端负载均衡的服务调用。
@@ -69,11 +71,14 @@ Feign旨在使编写Java Http客户端变得更容易。
 ![Feign程序流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Feign%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.jpg)  
 Controller层实现 Api服务的service接口  
 主启动类加  
-[**@EnableFeignClients**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-dept-feign/src/main/java/com/atguigu/springcloud/DeptConsumer80_Feign_App.java)(basePackages = {"com.atguigu.springcloud"})  
+[**@EnableFeignClients**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-dept-feign/src/main/java/com/atguigu/springcloud/DeptConsumer80_Feign_App.java)( basePackages = {"com.atguigu.springcloud"})  
 @ComponentScan("com.atguigu.springcloud")注解   
 Api服务的service接口加   
-[**@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)(value = "MICROSERVICECLOUD-DEPT")注解 和 8001，8002，8003 取得联系  
-## Hystrix断路器   
+[**@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)( value = "MICROSERVICECLOUD-DEPT")注解 和 8001，8002，8003 取得联系  
+## Hystrix断路器
+Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在分布式系统里，许多依赖不可避免的会调用失败，比如超时、异常等，Hystrix能够保证在一个依赖出问题的情况下，不会导致整体服务失败，避免级联故障，以提高分布式系统的弹性。 
+ 
+“断路器”本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控（类似熔断保险丝），向调用方返回一个符合预期的、可处理的备选响应（FallBack），而不是长时间的等待或者抛出调用方无法处理的异常，这样就保证了服务调用方的线程不会被长时间、不必要地占用，从而避免了故障在分布式系统中的蔓延，乃至雪崩。   
 - 服务雪崩  
 多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其它的微服务，这就是所谓的“扇出”。如果扇出的链路上某个微服务的调用响应时间过长或者不可用，对微服务A的调用就会占用越来越多的系统资源，进而引起系统崩溃，所谓的“雪崩效应”.  
 对于高流量的应用来说，单一的后端依赖可能会导致所有服务器上的所有资源都在几秒钟内饱和。比失败更糟糕的是，这些应用程序还可能导致服务之间的延迟增加，备份队列，线程和其他系统资源紧张，导致整个系统发生更多的级联故障。这些都表示需要对故障和延迟进行隔离和管理，以便单个依赖关系的失败，不能取消整个应用程序或系统。
