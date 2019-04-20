@@ -69,10 +69,10 @@ Feign旨在使编写Java Http客户端变得更容易。
 ![Feign程序流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Feign%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.jpg)  
 Controller层实现 Api服务的service接口  
 主启动类加  
-@EnableFeignClients(basePackages = {"com.atguigu.springcloud"})  
+[**@EnableFeignClients**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-dept-feign/src/main/java/com/atguigu/springcloud/DeptConsumer80_Feign_App.java)(basePackages = {"com.atguigu.springcloud"})  
 @ComponentScan("com.atguigu.springcloud")注解   
 Api服务的service接口加   
-@FeignClient(value = "MICROSERVICECLOUD-DEPT")注解 和 8001，8002，8003 取得联系  
+[**@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)(value = "MICROSERVICECLOUD-DEPT")注解 和 8001，8002，8003 取得联系  
 ## Hystrix断路器   
 - 服务雪崩  
 多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其它的微服务，这就是所谓的“扇出”。如果扇出的链路上某个微服务的调用响应时间过长或者不可用，对微服务A的调用就会占用越来越多的系统资源，进而引起系统崩溃，所谓的“雪崩效应”.  
