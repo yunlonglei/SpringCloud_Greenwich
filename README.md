@@ -87,11 +87,11 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 ### 服务熔断  
 熔断机制是应对雪崩效应的一种微服务链路保护机制。https://github.com/Netflix/Hystrix/wiki/How-To-Use
 当扇出链路的某个微服务不可用或者响应时间太长时，会进行服务的降级，进而熔断该节点微服务的调用，快速返回"错误"的响应信息。当检测到该节点微服务调用响应正常后恢复调用链路。在SpringCloud框架里熔断机制通过Hystrix实现。Hystrix会监控微服务间调用的状况，当失败的调用到一定阈值，缺省是5秒内20次调用失败就会启动熔断机制。  
+![服务熔断](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD.png)  
 熔断机制的注解是 [**@HystrixCommand(fallbackMethod = "processHystrix_Get")**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/controller/DeptController.java)。  
 修改主启动类DeptProvider8001_Hystrix_App并添加新注解[**@EnableCircuitBreaker**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/DeptProvider8001_Hystrix_App.java)  
-![服务熔断](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD.png)  
+  
 ### 服务降级  
-
 整体资源快不够了，忍痛将某些服务先关掉，待渡过难关，再开启回来。(服务降级处理是在客户端实现完成的，与服务端没有关系)。      
 **服务降级处理是在客户端实现完成的，与服务端没有关系**      
  FallbackFactory接口的类[**DeptClientServiceFallbackFactory**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientServiceFallbackFactory.java),千万不要忘记在类上面新增`@Component`注解，大坑！！！  
@@ -102,7 +102,7 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 
 ## 服务监控 hystrixDashboard  
 除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（Hystrix Dashboard），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面。  
-- 服务监控hystrixDashboard流程：  
+- 服务监控hystrixDashboard开发流程：  
 ![服务监控hystrixDashboard](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7hystrixDashboard.png)    
 1.新建类在主启动类改名+新注解[**@EnableHystrixDashboard**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-hystrix-dashboard/src/main/java/com/atguigu/springcloud/DeptConsumer_DashBoard_App.java)  
 2.所有Provider微服务提供类([**8001/8002/8003**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-8001/pom.xml))都需要在pom.xml配置监控依赖
@@ -126,4 +126,27 @@ hystrix-dashboard实时监控图解：
 - hystrix-dashboard监控案例  
 ![hystrix-dashboard监控案例](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E7%9B%91%E6%8E%A7%E6%A1%88%E4%BE%8B.bmp)  
 
+## zuul路由网关  
+Zuul包含了对请求的路由和过滤两个最主要的功能：  
+其中路由功能负责将外部请求转发到具体的微服务实例上，是实现外部访问统一入口的基础而过滤器功能则负责对请求的处理过程进行干预，是实现请求校验、服务聚合等功能的基础.  
+ 
+Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用，同时从Eureka中获得其他微服务的消息，也即以后的访问微服务都是通过Zuul跳转后获得。  
+注意：Zuul服务最终还是会注册进Eureka  
+提供=代理+路由+过滤三大功能
+- zuul路由网关开发流程：
+![zuul路由网关开发流程]()
+
+完成后访问路径（微服务名访问模式）http://myzuul.com:9527/**microservicecloud-dept**/dept/get/2 微服务名  
+- zuul路由访问映射规则：  
+![zuul路由访问映射规则]()
+```yaml
+zuul: 
+  prefix: /leiyunlong    #访问前缀
+  #ignored-services: microservicecloud-dept   #通过微服务名，指定忽略具体的微服务
+  ignored-services: "*"      #忽略所有的微服务名访问模式 ignored-services: microservicecloud-dept 
+
+  routes: 
+    mydept.serviceId: microservicecloud-dept   #路由的微服务名
+    mydept.path: /mydept/**    #访问模式
+```
 
