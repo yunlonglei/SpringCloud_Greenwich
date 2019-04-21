@@ -103,17 +103,19 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（Hystrix Dashboard），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面。  
 - 服务监控hystrixDashboard流程：  
 ![服务监控hystrixDashboard](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7hystrixDashboard.png)    
+1.新建类在主启动类改名+新注解@EnableHystrixDashboard
+2.所有Provider微服务提供类(8001/8002/8003)都需要监控依赖配置
 - hystrix-dashboard主页图：  
 ![hystrix-dashboard主页](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E4%B8%BB%E9%A1%B5.bmp)  
 1.Delay：该参数用来控制服务器上轮询监控信息的延迟时间，默认为2000毫秒，可以通过配置该属性来降低客户端的网络和CPU消耗。  
 2.Title：该参数对应了头部标题Hystrix Stream之后的内容，默认会使用具体监控实例的URL，可以通过配置该信息来展示更合适的标题。  
 - hystrix-dashboard实时监控图：  
-![hystrix-dashboard实时监控图解](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%9B%BE%E8%A7%A3.bmp)  
+![hystrix-dashboard实时监控图解](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%9B%BE.bmp)  
 hystrix-dashboard实时监控图解：   
 ![hystrix-dashboard实时监控图解](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%9B%BE%E8%A7%A3.bmp)  
 实心圆：共有两种含义。它通过颜色的变化代表了实例的健康程度，它的健康度从绿色<黄色<橙色<红色递减。该实心圆除了颜色的变化之外，它的大小也会根据实例的请求流量发生变化，流量越大该实心圆就越大。所以通过该实心圆的展示，就可以在大量的实例中快速的发现故障实例和高压力实例。  
 曲线：用来记录2分钟内流量的相对变化，可以通过它来观察到流量的上升和下降趋势。  
 - hystrix-dashboard监控案例  
-![hystrix-dashboard监控案例]()  
+![hystrix-dashboard监控案例](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E7%9B%91%E6%8E%A7%E6%A1%88%E4%BE%8B.bmp)  
 
 
