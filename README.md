@@ -137,8 +137,8 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 提供=代理+路由+过滤三大功能**
 - zuul路由网关开发流程：  
 ![zuul路由网关开发流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/zuul%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.png)
-
-完成后访问路径（微服务名访问模式）http://myzuul.com:9527/**microservicecloud-dept**/dept/get/2 微服务名  
+微服务名：microservicecloud-dept  
+完成后访问路径（微服务名访问模式）http://myzuul.com:9527/**microservicecloud-dept**/dept/get/2     
 - zuul路由访问映射规则：  
 ![zuul路由访问映射规则](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/zuul%E8%B7%AF%E7%94%B1%E8%AE%BF%E9%97%AE%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99.png)
 在microservicecloud-zuul-gateway-9527的application.yml 添加如下配置：
