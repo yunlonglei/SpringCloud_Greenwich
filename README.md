@@ -13,7 +13,8 @@ micoservicercloud-provide-dept-8002  | 微服务落地的服务提供者   | 800
 micoservicercloud-provide-dept-8003  | 微服务落地的服务提供者   | 8001,8002,8003基本相同（端口、yml配置不同）
 microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接口且以声明式的方法实现 | 和80相同，只启动一个
 microservicecloud-provider-dept-hystrix-8001 | Hystrix断路器：服务熔断、降级 | 同8001服务提供者 
-microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的对各个微服务（服务提供者）的运行情况的监控的系统
+microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的对各个微服务（服务提供者）的运行情况的监控的系统  
+
   *服务降级Feign_80（客户端）调用-> api.service  
   *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
 ## Ribbon自带的负载均衡策略  
