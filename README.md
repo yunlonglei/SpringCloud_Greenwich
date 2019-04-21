@@ -14,6 +14,7 @@ micoservicercloud-provide-dept-8003  | 微服务落地的服务提供者   | 800
 microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接口且以声明式的方法实现 | 和80相同，只启动一个
 microservicecloud-provider-dept-hystrix-8001 | Hystrix断路器：服务熔断、降级 | 同8001服务提供者 
 microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的对各个微服务（服务提供者）的运行情况的监控的系统  
+microservicecloud-zuul-gateway-9527 |zuul路由网关|一个**独立**的对各个微服务（服务提供者）提供网关服务的服务（注册进入eureka）
 
   *服务降级Feign_80（客户端）调用-> api.service  
   *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
@@ -103,6 +104,7 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 ## 服务监控 hystrixDashboard  
 除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（Hystrix Dashboard），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面。  
 - 服务监控hystrixDashboard开发流程：  
+和microservicecloud-provider-dept-hystrix-8001微服务配合使用，因为这个有hystrix服务   
 ![服务监控hystrixDashboard](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7hystrixDashboard.png)    
 1.新建类在主启动类改名+新注解[**@EnableHystrixDashboard**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-hystrix-dashboard/src/main/java/com/atguigu/springcloud/DeptConsumer_DashBoard_App.java)  
 2.所有Provider微服务提供类([**8001/8002/8003**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-8001/pom.xml))都需要在pom.xml配置监控依赖
@@ -131,14 +133,15 @@ Zuul包含了对请求的路由和过滤两个最主要的功能：
 其中路由功能负责将外部请求转发到具体的微服务实例上，是实现外部访问统一入口的基础而过滤器功能则负责对请求的处理过程进行干预，是实现请求校验、服务聚合等功能的基础.  
  
 Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用，同时从Eureka中获得其他微服务的消息，也即以后的访问微服务都是通过Zuul跳转后获得。  
-注意：Zuul服务最终还是会注册进Eureka  
-提供=代理+路由+过滤三大功能
+**注意：Zuul服务最终还是会注册进Eureka  
+提供=代理+路由+过滤三大功能**
 - zuul路由网关开发流程：  
 ![zuul路由网关开发流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/zuul%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.png)
 
 完成后访问路径（微服务名访问模式）http://myzuul.com:9527/**microservicecloud-dept**/dept/get/2 微服务名  
 - zuul路由访问映射规则：  
 ![zuul路由访问映射规则](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/zuul%E8%B7%AF%E7%94%B1%E8%AE%BF%E9%97%AE%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99.png)
+microservicecloud-zuul-gateway-9527的application.yml 添加如下配置：
 ```yaml
 zuul: 
   prefix: /leiyunlong    #访问前缀
