@@ -103,8 +103,15 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（Hystrix Dashboard），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面。  
 - 服务监控hystrixDashboard流程：  
 ![服务监控hystrixDashboard](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7hystrixDashboard.png)    
-1.新建类在主启动类改名+新注解@EnableHystrixDashboard
-2.所有Provider微服务提供类(8001/8002/8003)都需要监控依赖配置
+1.新建类在主启动类改名+新注解[**@EnableHystrixDashboard**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-hystrix-dashboard/src/main/java/com/atguigu/springcloud/DeptConsumer_DashBoard_App.java)  
+2.所有Provider微服务提供类([**8001/8002/8003**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-8001/pom.xml))都需要在pom.xml配置监控依赖
+```xml
+   <!-- actuator监控信息完善 -->
+   <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-actuator</artifactId>
+   </dependency>
+```
 - hystrix-dashboard主页图：  
 ![hystrix-dashboard主页](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E4%B8%BB%E9%A1%B5.bmp)  
 1.Delay：该参数用来控制服务器上轮询监控信息的延迟时间，默认为2000毫秒，可以通过配置该属性来降低客户端的网络和CPU消耗。  
