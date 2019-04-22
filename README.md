@@ -15,6 +15,8 @@ microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接�
 microservicecloud-provider-dept-hystrix-8001 | Hystrix断路器：服务熔断、降级 | 同8001服务提供者 
 microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的对各个微服务（服务提供者）的运行情况的监控的系统  
 microservicecloud-zuul-gateway-9527 |zuul路由网关|一个**独立**的对各个微服务（服务提供者）提供网关服务的服务（注册进入eureka）
+microservicecloud-config-3344|Config配置中心，Config服务提供者|Config服务端
+microservicecloud-config-client-3355| Config服务消费者|Config客户端
 
   *服务降级Feign_80（客户端）调用-> api.service  
   *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
@@ -152,4 +154,20 @@ zuul:
     mydept.serviceId: microservicecloud-dept   #路由的微服务名
     mydept.path: /mydept/**    #访问模式
 ```
-
+## SpringCloud Config 分布式配置中心
+微服务意味着要将单体应用中的业务拆分成一个个子服务，每个服务的粒度相对较小，因此系统中出现大量的服务。由于每个服务都需要必要的配置信息才能运行，所以一套集中式的、动态的配置管理设施是必不可少的。SpringCloud提供了ConfigServer来解决这个问题，我们每个微服务自己带着一个application.yml，上百个配置文件就会.....o(╥﹏╥)o
+- 是什么  
+     SpringCloud Config 为微服务架构中的微服务提供集中化的外部配置支持，配置服务器为各个不同微服务应用的所有环境提供了一个中心话的外部配置。  
+- 怎么玩  
+     SpringCloud Config分为服务端和客户端两部分。  
+### SpringCloudConfig_概述
+![SpringCloudConfig_概述]()  
+服务端也称为分布式配置中心，它是一个独立的微服务Service，用来连接配置服务器并为客户端提获取配置信息，加密/解密信息等访问接口。  
+<br/>
+客户端则是通过指定的配置中心来管理应用资源，以及与业务相关的配置内容，并在启动的时候从配置中心获取才和加载配置信息，配置服务器默认采用git来存储配置信息，这样就有助于对环境配置进行版本管理，并且可以通过git客户端工具来方便管理和访问配置内容。  
+### SpringCloud Config 服务端配置
+![SpringCloud Config 服务端配置]()  
+[**microservicecloud-config的新的Respository**](https://github.com/yunlonglei/microservicecloud-config/blob/master/application.yml)  
+[**microservicecloud-config的新的Respository中的application.yml**](https://github.com/yunlonglei/microservicecloud-config)  
+### SpringCloud Config 客户端配置与测试
+![**SpringCloud Config 客户端配置与测试**]()
