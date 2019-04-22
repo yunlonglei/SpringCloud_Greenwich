@@ -165,7 +165,8 @@ zuul:
 服务端也称为分布式配置中心，它是一个独立的微服务Service，用来连接配置服务器并为客户端提获取配置信息，加密/解密信息等访问接口。  
 <br/>
 客户端则是通过指定的配置中心来管理应用资源，以及与业务相关的配置内容，并在启动的时候从配置中心获取才和加载配置信息，配置服务器默认采用git来存储配置信息，这样就有助于对环境配置进行版本管理，并且可以通过git客户端工具来方便管理和访问配置内容。  
-### SpringCloud Config 服务端配置
+### SpringCloud Config 服务端配置  
+主启动类config_3344_StartSpringCloudApp中加入[**@EnableConfigService**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/java/com/atguigu/springcloud/Config_3344_StartSpringCloudApp.java)
 ![SpringCloud Config 服务端配置](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE.png)  
 - [**microservicecloud-config的新的Respository**](https://github.com/yunlonglei/microservicecloud-config)  
 - [**microservicecloud-config的新的Respository中的application.yml**](https://github.com/yunlonglei/microservicecloud-config/blob/master/application.yml)  
