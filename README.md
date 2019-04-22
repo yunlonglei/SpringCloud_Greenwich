@@ -166,8 +166,8 @@ zuul:
 <br/>
 客户端则是通过指定的配置中心来管理应用资源，以及与业务相关的配置内容，并在启动的时候从配置中心获取才和加载配置信息，配置服务器默认采用git来存储配置信息，这样就有助于对环境配置进行版本管理，并且可以通过git客户端工具来方便管理和访问配置内容。  
 ### SpringCloud Config 服务端配置  
-主启动类config_3344_StartSpringCloudApp中加入[**@EnableConfigService**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/java/com/atguigu/springcloud/Config_3344_StartSpringCloudApp.java)
-![SpringCloud Config 服务端配置](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE.png)  
+主启动类config_3344_StartSpringCloudApp中加入[**@EnableConfigService**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/java/com/atguigu/springcloud/Config_3344_StartSpringCloudApp.java)  
+![SpringCloud Config 服务端配置](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE.png)  
 - [**microservicecloud-config的新的Respository**](https://github.com/yunlonglei/microservicecloud-config)  
 - [**microservicecloud-config的新的Respository中的application.yml**](https://github.com/yunlonglei/microservicecloud-config/blob/master/application.yml)  
 ### SpringCloud Config 客户端配置与测试
