@@ -161,6 +161,7 @@ zuul:
 - 怎么玩  
      SpringCloud Config分为服务端和客户端两部分。  
 - 两个服务 [**microservicecloud-config-3344**](https://github.com/yunlonglei/MicroServiceCloud/tree/master/microservicecloud-config-3344)和[**microservicecloud-config-client-3355**](https://github.com/yunlonglei/MicroServiceCloud/tree/master/microservicecloud-config-client-3355)  
+### SpringCloudConfig 架构图
 ![SpringCloud Config 架构图](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 ### SpringCloudConfig_概述
 ![SpringCloudConfig_概述](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloudConfig_%E6%A6%82%E8%BF%B0.png)  
