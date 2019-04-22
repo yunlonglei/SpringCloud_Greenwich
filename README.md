@@ -161,13 +161,13 @@ zuul:
 - 怎么玩  
      SpringCloud Config分为服务端和客户端两部分。  
 ### SpringCloudConfig_概述
-![SpringCloudConfig_概述]()  
+![SpringCloudConfig_概述](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloudConfig_%E6%A6%82%E8%BF%B0.png)  
 服务端也称为分布式配置中心，它是一个独立的微服务Service，用来连接配置服务器并为客户端提获取配置信息，加密/解密信息等访问接口。  
 <br/>
 客户端则是通过指定的配置中心来管理应用资源，以及与业务相关的配置内容，并在启动的时候从配置中心获取才和加载配置信息，配置服务器默认采用git来存储配置信息，这样就有助于对环境配置进行版本管理，并且可以通过git客户端工具来方便管理和访问配置内容。  
 ### SpringCloud Config 服务端配置
-![SpringCloud Config 服务端配置]()  
-[**microservicecloud-config的新的Respository**](https://github.com/yunlonglei/microservicecloud-config/blob/master/application.yml)  
-[**microservicecloud-config的新的Respository中的application.yml**](https://github.com/yunlonglei/microservicecloud-config)  
+![SpringCloud Config 服务端配置](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE.png)  
+[**microservicecloud-config的新的Respository**](https://github.com/yunlonglei/microservicecloud-config)  
+[**microservicecloud-config的新的Respository中的application.yml**](https://github.com/yunlonglei/microservicecloud-config/blob/master/application.yml)  
 ### SpringCloud Config 客户端配置与测试
-![**SpringCloud Config 客户端配置与测试**]()
+![**SpringCloud Config 客户端配置与测试**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%B5%8B%E8%AF%95.png)
