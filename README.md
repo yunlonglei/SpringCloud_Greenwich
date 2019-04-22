@@ -160,6 +160,7 @@ zuul:
      SpringCloud Config 为微服务架构中的微服务提供集中化的外部配置支持，配置服务器为各个不同微服务应用的所有环境提供了一个中心话的外部配置。  
 - 怎么玩  
      SpringCloud Config分为服务端和客户端两部分。  
+两个服务 [**microservicecloud-config-3344**](https://github.com/yunlonglei/MicroServiceCloud/tree/master/microservicecloud-config-3344)和[**microservicecloud-config-client-3355**](https://github.com/yunlonglei/MicroServiceCloud/tree/master/microservicecloud-config-client-3355)
 ### SpringCloudConfig_概述
 ![SpringCloudConfig_概述](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloudConfig_%E6%A6%82%E8%BF%B0.png)  
 服务端也称为分布式配置中心，它是一个独立的微服务Service，用来连接配置服务器并为客户端提获取配置信息，加密/解密信息等访问接口。  
