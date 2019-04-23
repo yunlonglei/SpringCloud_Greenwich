@@ -17,8 +17,8 @@ microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的
 microservicecloud-zuul-gateway-9527 |zuul路由网关|一个**独立**的对各个微服务（服务提供者）提供网关服务的服务（注册进入eureka）
 microservicecloud-config-3344|Config配置中心，Config服务提供者|3344
 microservicecloud-config-client-3355| Config服务消费者|Config客户端
-microservicecloud-config-eureka-client-7001|带Config配置的eureka|
-microservicecloud-config-dept-client-8001|注册进Config_eureka、连接3344_Config服务端的消费者|bootstrap.yml中配置连接3344
+microservicecloud-config-eureka-client-7001|Config版的eurake服务端|连接到3344_Config获取自己的配置信息
+microservicecloud-config-dept-client-8001|Config版的dept微服务|注册进config-eureka-client-7001、连接3344_Config服务端的消费者
 
   *服务降级Feign_80（客户端）调用-> api.service  
   *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
