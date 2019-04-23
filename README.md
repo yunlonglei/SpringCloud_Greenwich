@@ -15,8 +15,10 @@ microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接�
 microservicecloud-provider-dept-hystrix-8001 | Hystrix断路器：服务熔断、降级 | 同8001服务提供者 
 microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的对各个微服务（服务提供者）的运行情况的监控的系统  
 microservicecloud-zuul-gateway-9527 |zuul路由网关|一个**独立**的对各个微服务（服务提供者）提供网关服务的服务（注册进入eureka）
-microservicecloud-config-3344|Config配置中心，Config服务提供者|Config服务端
+microservicecloud-config-3344|Config配置中心，Config服务提供者|3344
 microservicecloud-config-client-3355| Config服务消费者|Config客户端
+microservicecloud-config-eureka-client-7001|带Config配置的eureka|
+microservicecloud-config-dept-client-8001|注册进Config_eureka、连接3344_Config服务端的消费者|bootstrap.yml中配置连接3344
 
   *服务降级Feign_80（客户端）调用-> api.service  
   *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
@@ -176,4 +178,7 @@ zuul:
 ### SpringCloud Config 客户端配置与测试
 ![**SpringCloud Config 客户端配置与测试**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%B5%8B%E8%AF%95.png)  
 - [**microservicecloud-config的新的Respository中的microservicecloud-config-client.yml**](https://github.com/yunlonglei/microservicecloud-config/blob/master/microservicecloud-config-client.yml)  
-
+### SpringCloud Config 配置实战
+在GitHub中上传和控制配置文件，让microservicecloud-config-3344微服务连接到GitHub，microservicecloud-config-eureka-client-7001和microservicecloud-config-dept-client-8001连接microservicecloud-config-3344，再从这两个的bootstrap.yml配置文件中获取3344连接到的github的资源名称profile、label等。
+![**SpringCloud Config 配置实战**]()
+正当的是在GitHub上的配置文件中修改数据库连接，dev、test......中修改连接的库（Config_3344连接github，client-8001....连接3344从中取值）
