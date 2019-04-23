@@ -179,6 +179,8 @@ zuul:
 ![**SpringCloud Config 客户端配置与测试**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%B5%8B%E8%AF%95.png)  
 - [**microservicecloud-config的新的Respository中的microservicecloud-config-client.yml**](https://github.com/yunlonglei/microservicecloud-config/blob/master/microservicecloud-config-client.yml)  
 ### SpringCloud Config 配置实战
-在GitHub中上传和控制配置文件，让microservicecloud-config-3344微服务连接到GitHub，microservicecloud-config-eureka-client-7001和microservicecloud-config-dept-client-8001连接microservicecloud-config-3344，再从这两个的bootstrap.yml配置文件中获取3344连接到的github的资源名称profile、label等。
+在GitHub中上传和控制配置文件，让[**microservicecloud-config-3344**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/resources/application.yml)
+微服务连接到GitHub，[**microservicecloud-config-eureka-client-7001**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-eureka-client-7001/src/main/resources/bootstrap.yml)和[**microservicecloud-config-dept-client-8001**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-dept-client-8001/src/main/resources/bootstrap.yml)连接[**microservicecloud-config-3344**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/resources/application.yml)，
+再从这两个的bootstrap.yml配置文件中获取3344连接到的github的资源名称profile、label等。
 ![**SpringCloud Config 配置实战**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98.png)
 正当的是在GitHub上的配置文件中修改数据库连接，dev、test......中修改连接的库（Config_3344连接github，client-8001....连接3344从中取值）
