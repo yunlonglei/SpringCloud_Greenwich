@@ -32,7 +32,7 @@ Eureka 采用了 C-S 的设计架构。Eureka Server 作为服务注册功能的
 - 请注意和Dubbo的架构对比
 ![Eureka的基本架构1](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%841.bmp)  
 ![Eureka的基本架构2](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%842.png)  
-- 原理讲解
+- 原理讲解  
 ![Eureka服务注册与发现_原理讲解](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0_%E5%8E%9F%E7%90%86%E8%AE%B2%E8%A7%A3.png) 
 - Eureka服务注册与发现_构建步骤
 ![Eureka服务注册与发现_构建步骤](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0_%E6%9E%84%E5%BB%BA%E6%AD%A5%E9%AA%A4.png)   
