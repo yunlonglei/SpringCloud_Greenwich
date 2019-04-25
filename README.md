@@ -1,5 +1,7 @@
 # MicroServiceCloud
 ## SpringCloud微服务框架介绍
+SpringCloud版本：Dalston.SR1；
+SpringBoot版本：1.5.9.RELEASE;
 
 微服务     | 介绍     | 备注
 :-------- | :-----  |  :-------
