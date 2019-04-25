@@ -24,8 +24,26 @@ microservicecloud-config-dept-client-8001|Config版的dept微服务|注册进con
 
   *服务降级Feign_80（客户端）调用-> api.service  
   *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
-## Ribbon自带的负载均衡策略  
-### Spring Cloud Ribbon介绍  
+## Ribbon自带的负载均衡策略   
+### Spring Cloud Eureka介绍  
+Spring Cloud 封装了 Netflix 公司开发的 Eureka 模块来实现服务注册和发现(请对比Zookeeper)。  
+Eureka 采用了 C-S 的设计架构。Eureka Server 作为服务注册功能的服务器，它是服务注册中心。   
+而系统中的其他微服务，使用 Eureka 的客户端连接到 Eureka Server并维持心跳连接。这样系统的维护人员就可以通过 Eureka Server 来监控系统中各个微服务是否正常运行。SpringCloud 的一些其他模块（比如Zuul）就可以通过 Eureka Server 来发现系统中的其他微服务，并执行相关的逻辑。
+- 请注意和Dubbo的架构对比
+![Eureka的基本架构1]()  
+![Eureka的基本架构2]()  
+- 原理讲解
+![Eureka服务注册与发现_原理讲解]() 
+- Eureka服务注册与发现_构建步骤
+![Eureka服务注册与发现_构建步骤]()   
+- Eureka服务注册与发现_集群配置
+![Eureka服务注册与发现_集群配置]()   
+- Eureka包含两个组件：Eureka Server和Eureka Client
+Eureka Server提供服务注册服务  
+各个节点启动后，会在EurekaServer中进行注册，这样EurekaServer中的服务注册表中将会存储所有可用服务节点的信息，服务节点的信息可以在界面中直观的看到。    
+EurekaClient是一个Java客户端，用于简化Eureka Server的交互，客户端同时也具备一个内置的、使用轮询(round-robin)负载算法的负载均衡器。在应用启动后，将会向Eureka Server发送心跳(默认周期为30秒)。如果Eureka Server在多个心跳周期内没有接收到某个节点的心跳，EurekaServer将会从服务注册表中把这个服务节点移除（默认90秒）。  
+  
+### Spring Cloud Ribbon介绍 
 **Spring Cloud Ribbon**是一个基于HTTP和TCP的客户端负载均衡工具，它基于NetFlix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST请求自动转换为客户端负载均衡的服务调用。
   
 #### 客户端负载均衡  
