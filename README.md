@@ -40,7 +40,8 @@ Eureka 采用了 C-S 的设计架构。Eureka Server 作为服务注册功能的
 ![Eureka服务注册与发现_集群配置](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0_%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE.png)   
 - Eureka包含两个组件：Eureka Server和Eureka Client
 Eureka Server提供服务注册服务  
-各个节点启动后，会在EurekaServer中进行注册，这样EurekaServer中的服务注册表中将会存储所有可用服务节点的信息，服务节点的信息可以在界面中直观的看到。    
+各个节点启动后，会在EurekaServer中进行注册，这样EurekaServer中的服务注册表中将会存储所有可用服务节点的信息，服务节点的信息可以在界面中直观的看到。 
+<br/>
 EurekaClient是一个Java客户端，用于简化Eureka Server的交互，客户端同时也具备一个内置的、使用轮询(round-robin)负载算法的负载均衡器。在应用启动后，将会向Eureka Server发送心跳(默认周期为30秒)。如果Eureka Server在多个心跳周期内没有接收到某个节点的心跳，EurekaServer将会从服务注册表中把这个服务节点移除（默认90秒）。  
   
 ### Spring Cloud Ribbon介绍 
