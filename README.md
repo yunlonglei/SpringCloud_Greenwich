@@ -30,6 +30,7 @@ Spring Cloud 封装了 Netflix 公司开发的 Eureka 模块来实现服务注�
 Eureka 采用了 C-S 的设计架构。Eureka Server 作为服务注册功能的服务器，它是服务注册中心。   
 而系统中的其他微服务，使用 Eureka 的客户端连接到 Eureka Server并维持心跳连接。这样系统的维护人员就可以通过 Eureka Server 来监控系统中各个微服务是否正常运行。SpringCloud 的一些其他模块（比如Zuul）就可以通过 Eureka Server 来发现系统中的其他微服务，并执行相关的逻辑。
 - 请注意和Dubbo的架构对比
+![Dubbo和SpringCloud比较](./img-folder/Dubbo和SpringCloud比较.png)
 ![Eureka的基本架构1](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%841.bmp)  
 ![Eureka的基本架构2](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%842.png)  
 - 原理讲解  
