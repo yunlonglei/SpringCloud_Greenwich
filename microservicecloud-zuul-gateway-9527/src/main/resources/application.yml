@@ -5,26 +5,27 @@ spring:
   application:
     name: microservicecloud-zuul-gateway
  
-eureka: 
-  client: 
-    service-url: 
-      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
   instance:
     instance-id: gateway-9527.com
-    prefer-ip-address: true 
- 
- 
-zuul: 
-  #ignored-services: microservicecloud-dept
-  prefix: /leiyunlong
-  ignored-services: "*"
-  routes: 
-    mydept.serviceId: microservicecloud-dept
-    mydept.path: /mydept/**
- 
+    prefer-ip-address: true
 info:
   app.name: atguigu-microcloud
   company.name: www.atguigu.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+
+
+zuul:
+  prefix: /leiyunlong    #访问前缀 http://localhost:9527/leiyunlong/microservicecloud-dept/dept/get/5
+  #ignored-services: microservicecloud-dept   #指定忽略具体的微服务
+  ignored-services: "*"      #忽略所有的微服务名访问模式，所有的微服务都不能用微服务名来访问
+  routes:                    #路由的微服务
+    mydept.serviceId: microservicecloud-dept   #用下面的地址代替微服务名
+    mydept.path: /mydept/**    #访问模式 上面的微服务用这种配置来访问http://localhost:9527/leiyunlong/mydept/dept/get/5
+
 

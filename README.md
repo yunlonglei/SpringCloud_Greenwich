@@ -1,7 +1,7 @@
-# MicroServiceCloud
+# SpringCloud_Greenwich
 ## SpringCloud微服务框架介绍
 SpringCloud版本：Greenwich.RELEASE；
-SpringBoot版本：2.1.6.RELEASE;
+SpringBoot版本：2.1.6.RELEASE；
 
 微服务     | 介绍     | 备注
 :-------- | :-----  |  :-------
@@ -183,21 +183,25 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 **注意：Zuul服务最终还是会注册进Eureka  
 提供=代理+路由+过滤三大功能**
 - zuul路由网关开发流程：  
-![zuul路由网关开发流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/zuul%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.png)
+![zuul路由网关开发流程](img-folder/zuul路由网关开发流程.png)
 微服务名：microservicecloud-dept  
 完成后访问路径（微服务名访问模式）http://myzuul.com:9527/**microservicecloud-dept**/dept/get/2     
 - zuul路由访问映射规则：  
-![zuul路由访问映射规则](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/zuul%E8%B7%AF%E7%94%B1%E8%AE%BF%E9%97%AE%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99.png)
+![zuul路由访问映射规则](img-folder/zuul路由访问映射规则.png)
+不添加配置时用访问：
+```$xslt
+http://localhost:9527/microservicecloud-dept/dept/get/5
+http://localhost:8001/dept/get/5
+```
 在microservicecloud-zuul-gateway-9527的application.yml 添加如下配置：
 ```yaml
 zuul: 
-  prefix: /leiyunlong    #访问前缀
+  prefix: /leiyunlong    #访问前缀 http://localhost:9527/leiyunlong/microservicecloud-dept/dept/get/5
   #ignored-services: microservicecloud-dept   #通过微服务名，指定忽略具体的微服务
-  ignored-services: "*"      #忽略所有的微服务名访问模式 ignored-services: microservicecloud-dept 
-
+  ignored-services: "*"      #忽略所有的微服务名访问模式，所有的微服务都不能用微服务名来访问
   routes: 
     mydept.serviceId: microservicecloud-dept   #路由的微服务名
-    mydept.path: /mydept/**    #访问模式
+    mydept.path: /mydept/**    #访问模式 上面的微服务用这种配置来访问http://localhost:9527/leiyunlong/mydept/dept/get/5
 ```
 ## SpringCloud Config 分布式配置中心
 微服务意味着要将单体应用中的业务拆分成一个个子服务，每个服务的粒度相对较小，因此系统中出现大量的服务。由于每个服务都需要必要的配置信息才能运行，所以一套集中式的、动态的配置管理设施是必不可少的。SpringCloud提供了ConfigServer来解决这个问题，我们每个微服务自己带着一个application.yml，上百个配置文件就会.....o(╥﹏╥)o
