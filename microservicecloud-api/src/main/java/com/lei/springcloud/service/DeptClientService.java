@@ -2,6 +2,7 @@ package com.lei.springcloud.service;
 
 import com.lei.springcloud.entities.Dept;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import java.util.List;
 //@FeignClient(value = "MICROSERVICECLOUD-DEPT")//Fegin负载均衡用
 //下面这个注解是服务降级Hystrix用，配合了Fegin
 @FeignClient(value = "MICROSERVICECLOUD-DEPT", fallbackFactory = DeptClientServiceFallbackFactory.class)
+@Component
 public interface DeptClientService {
     @RequestMapping(value = "/dept/get/{id}", method = RequestMethod.GET)
     public Dept get(@PathVariable("id") long id);

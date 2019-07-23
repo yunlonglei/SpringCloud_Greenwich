@@ -132,8 +132,18 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
  FallbackFactory接口的类[**DeptClientServiceFallbackFactory**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientServiceFallbackFactory.java),千万不要忘记在类上面新增`@Component`注解，大坑！！！  
  //@FeignClient(value = "MICROSERVICECLOUD-DEPT")//Fegin负载均衡用  
  //下面这个注解是服务降级Hystrix用，配合了Fegin      
- [**DeptClientService接口在注解@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)中添加`fallbackFactory`属性值!   
+ [**DeptClientService接口在注解@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)中添加`fallbackFactory`属性值!
+```java
+ @FeignClient(value = "MICROSERVICECLOUD-DEPT", fallbackFactory = DeptClientServiceFallbackFactory.class)
+```  
+** 千万记得打开断路器！！！**
+```yaml
+feign:
+  hystrix:
+    enabled: true
+```
 ![服务降级](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7.png)  
+服务熔断是由服务端实现，服务降级是由客户端实现。  
 
 ## 服务监控 hystrixDashboard  
 除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（Hystrix Dashboard），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面。  

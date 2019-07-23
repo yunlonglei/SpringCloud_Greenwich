@@ -32,7 +32,7 @@ public class DeptController {
     public Dept processHystrix_Get(@PathVariable("id") Long id) {
         return new Dept()
                 .setDeptno(id)
-                .setDname("该ID：" + id + ",没有对应的信息服务,已经在controllrt中降级,来自--@HystrixCommand注解！")
+                .setDname("该ID：" + id + ",没有对应的信息服务,已经在controllrt中熔断,来自--@HystrixCommand注解！")
                 .setDb_source("\n no this database in MySQL");
     }
 }
