@@ -1,8 +1,8 @@
-package com.atguigu.springcloud.service;
+package com.lei.springcloud.service;
+
+import com.lei.springcloud.entities.Dept;
 
 import java.util.List;
-
-import com.atguigu.springcloud.entities.Dept;
 
 public interface DeptService
 {
