@@ -1,7 +1,7 @@
 # MicroServiceCloud
 ## SpringCloud微服务框架介绍
-SpringCloud版本：Dalston.SR1；
-SpringBoot版本：1.5.9.RELEASE;
+SpringCloud版本：Greenwich.RELEASE；
+SpringBoot版本：2.1.6.RELEASE;
 
 微服务     | 介绍     | 备注
 :-------- | :-----  |  :-------
@@ -23,8 +23,7 @@ microservicecloud-config-client-3355| Config服务消费者|Config客户端
 microservicecloud-config-eureka-client-7001|Config版的eurake服务端|连接到3344_Config获取自己的配置信息
 microservicecloud-config-dept-client-8001|Config版的dept微服务|注册进config-eureka-client-7001、连接3344_Config服务端的消费者
 
-  *服务降级Feign_80（客户端）调用-> api.service  
-  *服务熔断hystrix_8001（服务端）被 _80（客户端调用）
+
 ## Spring Cloud Eureka   
 #### Spring Cloud Eureka介绍  
 Spring Cloud 封装了 Netflix 公司开发的 Eureka 模块来实现服务注册和发现(请对比Zookeeper)。  
@@ -32,14 +31,14 @@ Eureka 采用了 C-S 的设计架构。Eureka Server 作为服务注册功能的
 而系统中的其他微服务，使用 Eureka 的客户端连接到 Eureka Server并维持心跳连接。这样系统的维护人员就可以通过 Eureka Server 来监控系统中各个微服务是否正常运行。SpringCloud 的一些其他模块（比如Zuul）就可以通过 Eureka Server 来发现系统中的其他微服务，并执行相关的逻辑。
 - 请注意和Dubbo的架构对比
 ![Dubbo和SpringCloud比较](img-folder/Dubbo和SpringCloud.png)
-![Eureka的基本架构1](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%841.bmp)  
-![Eureka的基本架构2](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%842.png)  
+![Eureka的基本架构1](img-folder/Eureka的基本架构1.bmp)  
+![Eureka的基本架构2](img-folder/Eureka的基本架构2.png)  
 - 原理讲解  
-![Eureka服务注册与发现_原理讲解](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0_%E5%8E%9F%E7%90%86%E8%AE%B2%E8%A7%A3.png) 
+![Eureka服务注册与发现_原理讲解](img-folder/Eureka服务注册与发现_原理讲解.png) 
 - Eureka服务注册与发现_构建步骤
-![Eureka服务注册与发现_构建步骤](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0_%E6%9E%84%E5%BB%BA%E6%AD%A5%E9%AA%A4.png)   
+![Eureka服务注册与发现_构建步骤](img-folder/Eureka服务注册与发现_构建步骤.png)   
 - Eureka服务注册与发现_集群配置
-![Eureka服务注册与发现_集群配置](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0_%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE.png)   
+![Eureka服务注册与发现_集群配置](img-folder/Eureka服务注册与发现_集群配置.png)   
 - Eureka包含两个组件：Eureka Server和Eureka Client
 Eureka Server提供服务注册服务  
  
@@ -52,8 +51,8 @@ EurekaClient是一个Java客户端，用于简化Eureka Server的交互，客户
   
 #### 客户端负载均衡  
 平时我们说的负载均衡都指的是服务端的负载均衡，其中分为**硬件负载均衡**和**软件负载均衡**。硬件负载均衡比如**F5**，软件负载均衡**Nginx**。服务器端的负载均衡会维护一个可用的服务器清单，通过心跳来剔除不可用的服务端节点，当客户端的请求过来时，按照负载均衡算法选出一台服务器的地址进行转发。客户端负载均衡和服务器端负载均衡最大的不同就是维护的服务器清单保存的位置，在客户端负载均衡中，所有的客户端节点都要维护自己要访问的服务清单。这些服务的清单都是从注册中心获取的，比如Eureka。  
-![Ribbon架构模型](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Ribbon%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B.bmp)  
-![Ribbon自带的负载均衡策略](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Ribbon%E8%87%AA%E5%B8%A6%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5.png)  
+![Ribbon架构模型](img-folder/Ribbon架构模型.bmp)  
+![Ribbon自带的负载均衡策略](img-folder/Ribbon自带的负载均衡策略.png)  
   
 #### 配置Ribbon的负载均衡  
 这里以RandomRule随机负载均衡为例：
@@ -67,16 +66,21 @@ property为属性名：我们要配置负载均衡策略就是NFLoadBalancerRule
 cloud-provider.ribbon.NFLoadBalancerRuleClassName=com.netflix.loadbalancer.RandomRule
 ```
 - 使用代码配置
-  使用@RibbonClient注解,可以使用多种负载均衡策略
  ```java
 @Configuration
 public class MyIRule {
     @Bean
     public IRule rule() {
-        return new RandomRule();
+        /*
+        在配置类中配置负载均衡的策略
+        return new RoundRobinRule();
+        return new RandomRule();//达到的目的，用我们重新选择的随机算法替代默认的轮询。
+        */
+        return new RandomRule_ZY();
     }
 }
 ```
+使用@RibbonClient注解,可以使用多种负载均衡策略
 ```java
 @EnableDiscoveryClient
 // name是服务提供者名，configuration是我们配置的负载均衡策略
@@ -87,10 +91,10 @@ public class CloudConsumerApplication {
 	}
 }
 ```
-- 也可以自己配置使用，[**自己的负载均衡策略**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-dept-80/src/main/java/com/atguigu/myrule/RandomRule_ZY.java)（继承 AbstractLoadBalancerRule），在主启动类添加 **@RibbonClient(name="MICROSERVICECLOUD-DEPT",configuration=MySelfRule.class)** 注解；  
+- 也可以自己配置使用，[**自己的负载均衡策略**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-consumer-ribbon-80/src/main/java/lei/myrule/RandomRule_ZY.java)（继承 AbstractLoadBalancerRule），在主启动类添加 **@RibbonClient(name="MICROSERVICECLOUD-DEPT",configuration=MySelfRule.class)** 注解；  
 用http://localhost/consumer/dept/list 访问  
 
-## Fegin的负载均衡  
+## Fegin声明式服务调用
 - Feign能干什么  
 Feign旨在使编写Java Http客户端变得更容易。
 前面在使用**Ribbon+RestTemplate**时，利用RestTemplate对http请求的封装处理，形成了一套模版化的调用方法。但是在实际开发中，由于对服务依赖的调用可能不止一处，往往一个接口会被多处调用，所以通常都会针对每个微服务自行封装一些客户端类来包装这些依赖服务的调用。所以，Feign在此基础上做了进一步封装，由他来帮助我们定义和实现依赖服务接口的定义。在Feign的实现下，我们只需创建一个接口并使用注解的方式来配置它(以前是Dao接口上面标注Mapper注解,现在是一个**微服务接口上面标注一个Feign注解**即可)，即可完成对服务提供方的接口绑定，简化了使用Spring cloud Ribbon时，自动封装服务调用客户端的开发量。   
@@ -99,13 +103,13 @@ Feign旨在使编写Java Http客户端变得更容易。
   **Feign通过接口的方法注解@FeignClient(value = "MICROSERVICECLOUD-DEPT")调用Rest服务**（之前是Ribbon+RestTemplate），
 该请求发送给Eureka服务器（http://MICROSERVICECLOUD-DEPT/dept/list）,
 - 通过Feign直接找到服务接口，由于在进行服务调用的时候融合了Ribbon技术，所以也支持负载均衡作用。  
-![Feign程序流程](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Feign%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.jpg)  
+![Feign程序流程](img-folder/Feign程序开发流程.jpg)  
 Controller层实现 Api服务的service接口  
 主启动类加  
-[**@EnableFeignClients**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-dept-feign/src/main/java/com/atguigu/springcloud/DeptConsumer80_Feign_App.java)( basePackages = {"com.atguigu.springcloud"})  
-@ComponentScan("com.atguigu.springcloud")注解   
+[**@EnableFeignClients**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-consumer-dept-feign/src/main/java/com/lei/springcloud/DeptConsumer80_Feign_App.java)( basePackages = {"com.lei.springcloud"})  
+@ComponentScan("com.lei.springcloud")注解，加入引用的内容。  
 Api服务的service接口加   
-[**@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)( value = "MICROSERVICECLOUD-DEPT")注解 和 8001，8002，8003 取得联系  
+[**@FeignClient**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-api/src/main/java/com/lei/springcloud/service/DeptClientService.java)( value = "MICROSERVICECLOUD-DEPT")注解 和 8001，8002，8003 取得联系  
 ## Hystrix断路器
 Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在分布式系统里，许多依赖不可避免的会调用失败，比如超时、异常等，Hystrix能够保证在一个依赖出问题的情况下，不会导致整体服务失败，避免级联故障，以提高分布式系统的弹性。 
  
@@ -117,9 +121,9 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 ### 服务熔断  
 熔断机制是应对雪崩效应的一种微服务链路保护机制。https://github.com/Netflix/Hystrix/wiki/How-To-Use
 当扇出链路的某个微服务不可用或者响应时间太长时，会进行服务的降级，进而熔断该节点微服务的调用，快速返回"错误"的响应信息。当检测到该节点微服务调用响应正常后恢复调用链路。在SpringCloud框架里熔断机制通过Hystrix实现。Hystrix会监控微服务间调用的状况，当失败的调用到一定阈值，缺省是5秒内20次调用失败就会启动熔断机制。  
-![服务熔断](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD.png)  
-熔断机制的注解是 [**@HystrixCommand(fallbackMethod = "processHystrix_Get")**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/controller/DeptController.java)。**在服务抛出异常后会自动调用fallbackMethod中的方法！**  
-修改主启动类DeptProvider8001_Hystrix_App并添加新注解[**@EnableCircuitBreaker**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/DeptProvider8001_Hystrix_App.java)  
+![服务熔断](img-folder/服务熔断.png)  
+熔断机制的注解是 [**@HystrixCommand(fallbackMethod = "processHystrix_Get")**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/lei/springcloud/controller/DeptController.java)。**在服务抛出异常后会自动调用fallbackMethod中的方法！**  
+修改主启动类DeptProvider8001_Hystrix_App并添加新注解[**@EnableCircuitBreaker**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/lei/springcloud/DeptProvider8001_Hystrix_App.java)  
 熔断是由服务端实现的：
 ```java
  @HystrixCommand(fallbackMethod = "processHystrix_Get") //异常处理方法注解
@@ -129,29 +133,28 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 ### 服务降级  
 整体资源快不够了，忍痛将某些服务先关掉，待渡过难关，再开启回来。(服务降级处理是在客户端实现完成的，与服务端没有关系)。      
 **服务降级处理是在客户端实现完成的，与服务端没有关系**      
- FallbackFactory接口的类[**DeptClientServiceFallbackFactory**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientServiceFallbackFactory.java),千万不要忘记在类上面新增`@Component`注解，大坑！！！  
+ FallbackFactory接口的类[**DeptClientServiceFallbackFactory**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-api/src/main/java/com/lei/springcloud/service/DeptClientServiceFallbackFactory.java),千万不要忘记在类上面新增`@Component`注解，大坑！！！  
  //@FeignClient(value = "MICROSERVICECLOUD-DEPT")//Fegin负载均衡用  
- //下面这个注解是服务降级Hystrix用，配合了Fegin      
- [**DeptClientService接口在注解@FeignClient**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-api/src/main/java/com/atguigu/springcloud/service/DeptClientService.java)中添加`fallbackFactory`属性值!
-```java
- @FeignClient(value = "MICROSERVICECLOUD-DEPT", fallbackFactory = DeptClientServiceFallbackFactory.class)
-```  
-** 千万记得打开断路器！！！**
+ //下面这个注解是服务降级Hystrix用，配合了Fegin       
+ [**DeptClientService接口在注解@FeignClient**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-api/src/main/java/com/lei/springcloud/service/DeptClientService.java)中添加`fallbackFactory`属性值!  
+**  千万记得打开断路器！！！**
 ```yaml
 feign:
   hystrix:
     enabled: true
 ```
-![服务降级](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7.png)  
+![服务降级](img-folder/服务降级.png)  
 服务熔断是由服务端实现，服务降级是由客户端实现。  
+  *服务降级Feign_80（客户端）调用-> api.service  
+  *服务熔断hystrix_8001（服务端）被 _80（客户端调用）  
 
 ## 服务监控 hystrixDashboard  
 除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（Hystrix Dashboard），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面。  
 - 服务监控hystrixDashboard开发流程：  
 和microservicecloud-provider-dept-hystrix-8001微服务配合使用，因为这个有hystrix服务   
-![服务监控hystrixDashboard](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7hystrixDashboard.png)    
-1.新建类在主启动类改名+新注解[**@EnableHystrixDashboard**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-consumer-hystrix-dashboard/src/main/java/com/atguigu/springcloud/DeptConsumer_DashBoard_App.java)  
-2.所有Provider微服务提供类([**8001/8002/8003**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-8001/pom.xml))都需要在pom.xml配置监控依赖
+![服务监控hystrixDashboard](img-folder/服务监控hystrixDashboard.png)    
+1.新建类在主启动类改名+新注解[**@EnableHystrixDashboard**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-consumer-hystrix-dashboard/src/main/java/com/lei/springcloud/DeptConsumer_DashBoard_App.java)  
+2.所有Provider微服务提供类([**8001/8002/8003**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-provider-dept-8001/pom.xml))都需要在pom.xml配置监控依赖
 ```xml
    <!-- actuator监控信息完善 -->
    <dependency>
@@ -160,17 +163,17 @@ feign:
    </dependency>
 ```
 - hystrix-dashboard主页图：  
-![hystrix-dashboard主页](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E4%B8%BB%E9%A1%B5.bmp)  
+![hystrix-dashboard主页](img-folder/hystrix-dashboard主页.bmp)  
 1.Delay：该参数用来控制服务器上轮询监控信息的延迟时间，默认为2000毫秒，可以通过配置该属性来降低客户端的网络和CPU消耗。  
 2.Title：该参数对应了头部标题Hystrix Stream之后的内容，默认会使用具体监控实例的URL，可以通过配置该信息来展示更合适的标题。  
 - hystrix-dashboard实时监控图：  
-![hystrix-dashboard实时监控图解](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%9B%BE.bmp)  
+![hystrix-dashboard实时监控图](img-folder/hystrix-dashboard实时监控图.bmp)  
 hystrix-dashboard实时监控图解：   
-![hystrix-dashboard实时监控图解](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/hystrix-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%9B%BE%E8%A7%A3.bmp)  
+![hystrix-dashboard实时监控图解](img-folder/hystrix-dashboard实时监控图解.bmp)  
 实心圆：共有两种含义。它通过颜色的变化代表了实例的健康程度，它的健康度从绿色<黄色<橙色<红色递减。该实心圆除了颜色的变化之外，它的大小也会根据实例的请求流量发生变化，流量越大该实心圆就越大。所以通过该实心圆的展示，就可以在大量的实例中快速的发现故障实例和高压力实例。  
 曲线：用来记录2分钟内流量的相对变化，可以通过它来观察到流量的上升和下降趋势。  
 - hystrix-dashboard监控案例  
-![hystrix-dashboard监控案例](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E7%9B%91%E6%8E%A7%E6%A1%88%E4%BE%8B.bmp)  
+![hystrix-dashboard监控案例](img-folder/监控案例.bmp)  
 
 ## zuul路由网关  
 Zuul包含了对请求的路由和过滤两个最主要的功能：  
