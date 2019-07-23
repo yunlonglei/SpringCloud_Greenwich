@@ -8,7 +8,7 @@ SpringBoot版本：1.5.9.RELEASE;
 microservicecloud-api |  封装的整体Entity/接口/公共配置等;
 micoservicercloud-provide-dept-8001  | 微服务落地的服务提供者 | 创建多个服务提供者,在控制层加入DiscoveryClient
 microservicecloud-consumer-dept-80   | 微服务调用的客户端使用-80端口| Ribbon->在配置类ConfigBean中加入@LoadBalanced实现负载均衡
-microservicecloud-consumer-dept| Ribbon负载均衡80端口，分发8001 2 3|新版springcloud使用，与上面类似
+microservicecloud-consumer-ribbon-80| Ribbon负载均衡80端口，分发8001 2 3|新版springcloud使用，与上面类似
 microservicecloud-eureka-7001    | Eureka Server 提供服务注册和发现 | 创建多个注册中心
 microservicecloud-eureka-7002    | Eureka Server 提供服务注册和发现 | 7001,7002,7003基本相同（端口、yml配置不同）
 microservicecloud-eureka-7003    | Eureka Server 提供服务注册和发现 | 7001,7002,7003基本相同（端口、yml配置不同）
@@ -31,7 +31,7 @@ Spring Cloud 封装了 Netflix 公司开发的 Eureka 模块来实现服务注�
 Eureka 采用了 C-S 的设计架构。Eureka Server 作为服务注册功能的服务器，它是服务注册中心。   
 而系统中的其他微服务，使用 Eureka 的客户端连接到 Eureka Server并维持心跳连接。这样系统的维护人员就可以通过 Eureka Server 来监控系统中各个微服务是否正常运行。SpringCloud 的一些其他模块（比如Zuul）就可以通过 Eureka Server 来发现系统中的其他微服务，并执行相关的逻辑。
 - 请注意和Dubbo的架构对比
-![Dubbo和SpringCloud比较](./img-folder/Dubbo和SpringCloud比较.png)
+![Dubbo和SpringCloud比较](img-folder/Dubbo和SpringCloud.png)
 ![Eureka的基本架构1](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%841.bmp)  
 ![Eureka的基本架构2](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%842.png)  
 - 原理讲解  
