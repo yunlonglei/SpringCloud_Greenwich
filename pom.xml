@@ -92,7 +92,6 @@
 		<module>microservicecloud-api</module>
 		<module>microservicecloud-provider-dept-8001</module>
 		<module>microservicecloud-admin-7010</module>
-		<module>microservicecloud-consumer-dept-80</module>
 		<module>microservicecloud-eureka-7001</module>
 		<module>microservicecloud-eureka-7002</module>
 		<module>microservicecloud-eureka-7003</module>
@@ -106,7 +105,6 @@
 		<module>microservicecloud-config-3344</module>
 		<module>microservicecloud-config-client-3355</module>
 		<module>microservicecloud-config-dept-client-8001</module>
-		<module>microservicecloud-consumer-dept</module>
 		<module>microservicecloud-admin-7010</module>
         <module>microservicecloud-consumer-ribbon-80</module>
     </modules>
