@@ -7,6 +7,7 @@
 
 	<settings>
 		<setting name="cacheEnabled" value="true" /><!-- 二级缓存开启 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
 
 </configuration>
