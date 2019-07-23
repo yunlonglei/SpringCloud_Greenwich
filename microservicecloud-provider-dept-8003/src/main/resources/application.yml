@@ -3,10 +3,12 @@ server:
   
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml  #mybatis所在路径
-  type-aliases-package: com.atguigu.springcloud.entities #entity别名类
+  type-aliases-package: com.lei.springcloud.entities #entity别名类
   mapper-locations:
   - classpath:mybatis/mapper/**/*.xml #mapper映射文件
-    
+    #configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 spring:
    application:
     name: microservicecloud-dept 

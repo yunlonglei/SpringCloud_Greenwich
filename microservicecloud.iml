@@ -12,6 +12,8 @@
       <sourceFolder url="file://$MODULE_DIR$/microservicecloud-consumer-dept-80/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/microservicecloud-consumer-dept-80/src/test/resources" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/microservicecloud-consumer-dept-80/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/microservicecloud-admin-7010/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/microservicecloud-admin-7010/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/microservicecloud-config-eureka-client-7001/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>

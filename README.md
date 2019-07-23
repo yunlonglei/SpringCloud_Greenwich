@@ -8,6 +8,7 @@ SpringBoot版本：1.5.9.RELEASE;
 microservicecloud-api |  封装的整体Entity/接口/公共配置等;
 micoservicercloud-provide-dept-8001  | 微服务落地的服务提供者 | 创建多个服务提供者,在控制层加入DiscoveryClient
 microservicecloud-consumer-dept-80   | 微服务调用的客户端使用-80端口| Ribbon->在配置类ConfigBean中加入@LoadBalanced实现负载均衡
+microservicecloud-consumer-dept| Ribbon负载均衡80端口，分发8001 2 3|新版springcloud使用，与上面类似
 microservicecloud-eureka-7001    | Eureka Server 提供服务注册和发现 | 创建多个注册中心
 microservicecloud-eureka-7002    | Eureka Server 提供服务注册和发现 | 7001,7002,7003基本相同（端口、yml配置不同）
 microservicecloud-eureka-7003    | Eureka Server 提供服务注册和发现 | 7001,7002,7003基本相同（端口、yml配置不同）
@@ -56,7 +57,8 @@ EurekaClient是一个Java客户端，用于简化Eureka Server的交互，客户
   
 #### 配置Ribbon的负载均衡  
 这里以RandomRule随机负载均衡为例：
-- 使用配置文件配置Ribbon的负载均衡
+- 使用配置文件配置Ribbon的负载均衡，
+ 在配置类ConfigBean中加入@LoadBalanced实现负载均衡
 ```
 配置格式为<client>.<nameSpace>.<property>=<value>
 client为客户端名称：我们的服务提供者名我cloud-provider
@@ -116,8 +118,13 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
 熔断机制是应对雪崩效应的一种微服务链路保护机制。https://github.com/Netflix/Hystrix/wiki/How-To-Use
 当扇出链路的某个微服务不可用或者响应时间太长时，会进行服务的降级，进而熔断该节点微服务的调用，快速返回"错误"的响应信息。当检测到该节点微服务调用响应正常后恢复调用链路。在SpringCloud框架里熔断机制通过Hystrix实现。Hystrix会监控微服务间调用的状况，当失败的调用到一定阈值，缺省是5秒内20次调用失败就会启动熔断机制。  
 ![服务熔断](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD.png)  
-熔断机制的注解是 [**@HystrixCommand(fallbackMethod = "processHystrix_Get")**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/controller/DeptController.java)。  
+熔断机制的注解是 [**@HystrixCommand(fallbackMethod = "processHystrix_Get")**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/controller/DeptController.java)。**在服务抛出异常后会自动调用fallbackMethod中的方法！**  
 修改主启动类DeptProvider8001_Hystrix_App并添加新注解[**@EnableCircuitBreaker**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-provider-dept-hystrix-8001/src/main/java/com/atguigu/springcloud/DeptProvider8001_Hystrix_App.java)  
+熔断是由服务端实现的：
+```java
+ @HystrixCommand(fallbackMethod = "processHystrix_Get") //异常处理方法注解
+ @EnableCircuitBreaker  //断路器
+```  
   
 ### 服务降级  
 整体资源快不够了，忍痛将某些服务先关掉，待渡过难关，再开启回来。(服务降级处理是在客户端实现完成的，与服务端没有关系)。      

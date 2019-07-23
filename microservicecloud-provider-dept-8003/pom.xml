@@ -1,17 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.atguigu.springcloud</groupId>
+    <groupId>com.lei.springcloud</groupId>
     <artifactId>microservicecloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>microservicecloud-provider-dept-8003</artifactId>
-
   
 	<dependencies>
 		<!-- 引入自己定义的api通用包，可以使用Dept部门Entity -->
 		<dependency>
-			<groupId>com.atguigu.springcloud</groupId>
+			<groupId>com.lei.springcloud</groupId>
 			<artifactId>microservicecloud-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -23,7 +22,7 @@
 		<!-- 将微服务provider侧注册进eureka -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -65,6 +64,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>springloaded</artifactId>
+			<version>1.2.8.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

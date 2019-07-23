@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.atguigu.springcloud.dao.DeptDao">
+<mapper namespace="com.lei.springcloud.dao.DeptDao">
 
 	<select id="findById" resultType="Dept" parameterType="Long">
 		select deptno,dname,db_source from dept where deptno=#{deptno};

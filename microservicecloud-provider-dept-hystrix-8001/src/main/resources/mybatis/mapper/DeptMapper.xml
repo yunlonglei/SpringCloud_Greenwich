@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.atguigu.springcloud.dao.DeptDao">
+<mapper namespace="com.lei.springcloud.dao.DeptDao">
 
-	<select id="findById" resultType="Dept" parameterType="Long">
+	<select id="findById" resultType="Dept" parameterType="java.lang.Long">
 		select deptno,dname,db_source from dept where deptno=#{deptno};
 	</select>
 	<select id="findAll" resultType="Dept">

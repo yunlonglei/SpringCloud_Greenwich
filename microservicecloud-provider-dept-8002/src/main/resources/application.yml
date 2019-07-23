@@ -3,7 +3,7 @@ server:
   
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml  #mybatis所在路径
-  type-aliases-package: com.atguigu.springcloud.entities #entity别名类
+  type-aliases-package: com.lei.springcloud.entities #entity别名类
   mapper-locations:
   - classpath:mybatis/mapper/**/*.xml #mapper映射文件
     
@@ -33,9 +33,5 @@ eureka:
 info:
   app.name: atguigu-microservicecloud
   company.name: www.atguigu.com
-  build.artifactId: ${project.artifactId}$
-  build.version: ${project.version}$
-      
-      
-      
-
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
