@@ -5,23 +5,23 @@ SpringBoot版本：2.1.6.RELEASE；
 
 微服务     | 介绍     | 备注
 :-------- | :-----  |  :-------
-microservicecloud-api |  封装的整体Entity/接口/公共配置等;
-micoservicercloud-provide-dept-8001  | 微服务落地的服务提供者 | 创建多个服务提供者,在控制层加入DiscoveryClient
-microservicecloud-consumer-dept-80   | 微服务调用的客户端使用-80端口| Ribbon->在配置类ConfigBean中加入@LoadBalanced实现负载均衡
+microservicecloud-admin-7010|服务可视化监控|也注册进eureka，用于监控基于 Spring Boot 的应用
+microservicecloud-api |  封装的整体Entity/接口/公共配置等;|提供公共内容，不是能启动的服务
+microservicecloud-config-3344|Config配置中心，Config服务提供者|3344
+microservicecloud-config-client-3355| Config服务消费者|Config客户端
+microservicecloud-config-dept-client-8001|Config版的dept微服务|注册进config-eureka-client-7001、连接3344_Config服务端的消费者
+microservicecloud-config-eureka-client-7001|Config版的eurake服务端|连接到3344_Config获取自己的配置信息
+microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接口且以声明式的方法实现 | 和80相同，只启动一个
+microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的对各个微服务（服务提供者）的运行情况的监控的系统  
 microservicecloud-consumer-ribbon-80| Ribbon负载均衡80端口，分发8001 2 3|新版springcloud使用，与上面类似
 microservicecloud-eureka-7001    | Eureka Server 提供服务注册和发现 | 创建多个注册中心
 microservicecloud-eureka-7002    | Eureka Server 提供服务注册和发现 | 7001,7002,7003基本相同（端口、yml配置不同）
 microservicecloud-eureka-7003    | Eureka Server 提供服务注册和发现 | 7001,7002,7003基本相同（端口、yml配置不同）
+micoservicercloud-provide-dept-8001  | 微服务落地的服务提供者 | 创建多个服务提供者,在控制层加入DiscoveryClient
 micoservicercloud-provide-dept-8002  | 微服务落地的服务提供者   | 8001,8002,8003基本相同（端口、yml配置不同）
 micoservicercloud-provide-dept-8003  | 微服务落地的服务提供者   | 8001,8002,8003基本相同（端口、yml配置不同）
-microservicecloud-consumer-dept-feign | Feign负载均衡定义服务绑定接口且以声明式的方法实现 | 和80相同，只启动一个
 microservicecloud-provider-dept-hystrix-8001 | Hystrix断路器：服务熔断、降级 | 同8001服务提供者 
-microservicecloud-consumer-hystrix-dashboard |  服务监控|一个**独立**的对各个微服务（服务提供者）的运行情况的监控的系统  
 microservicecloud-zuul-gateway-9527 |zuul路由网关|一个**独立**的对各个微服务（服务提供者）提供网关服务的服务（注册进入eureka）
-microservicecloud-config-3344|Config配置中心，Config服务提供者|3344
-microservicecloud-config-client-3355| Config服务消费者|Config客户端
-microservicecloud-config-eureka-client-7001|Config版的eurake服务端|连接到3344_Config获取自己的配置信息
-microservicecloud-config-dept-client-8001|Config版的dept微服务|注册进config-eureka-client-7001、连接3344_Config服务端的消费者
 
 
 ## Spring Cloud Eureka   
@@ -45,10 +45,15 @@ Eureka Server提供服务注册服务
 各个节点启动后，会在EurekaServer中进行注册，这样EurekaServer中的服务注册表中将会存储所有可用服务节点的信息，服务节点的信息可以在界面中直观的看到。 
 <br/>
 EurekaClient是一个Java客户端，用于简化Eureka Server的交互，客户端同时也具备一个内置的、使用轮询(round-robin)负载算法的负载均衡器。在应用启动后，将会向Eureka Server发送心跳(默认周期为30秒)。如果Eureka Server在多个心跳周期内没有接收到某个节点的心跳，EurekaServer将会从服务注册表中把这个服务节点移除（默认90秒）。  
+## Spring Cloud Admin   
+#### Spring Cloud Admin介绍    
+Spring Boot Admin 用于监控基于 Spring Boot 的应用，它是在 Spring Boot Actuator 的基础上提供简洁的可视化 WEB UI。Spring Boot Admin 提供了很多功能，如显示 name、id 和 version，显示在线状态，Loggers 的日志级别管理，Threads 线程管理，Environment 管理等。  
+![Admin主页](img-folder/Admin主页.jpg)  
+![Admin服务页面](img-folder/Admin服务页面.jpg)  
   
-### Spring Cloud Ribbon介绍 
-**Spring Cloud Ribbon**是一个基于HTTP和TCP的客户端负载均衡工具，它基于NetFlix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST请求自动转换为客户端负载均衡的服务调用。
-  
+## Spring Cloud Ribbon介绍 
+**Spring Cloud Ribbon**是一个基于HTTP和TCP的客户端负载均衡工具，它基于NetFlix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松地将面向服务的REST请求自动转换为客户端负载均衡的服务调用。  
+在 Spring Boot 项目中，Spring Boot Admin 作为 Server 端，其他的要被监控的应用作为 Client 端。他也是基于Eeureka的服务发现，来发现其他的微服务。
 #### 客户端负载均衡  
 平时我们说的负载均衡都指的是服务端的负载均衡，其中分为**硬件负载均衡**和**软件负载均衡**。硬件负载均衡比如**F5**，软件负载均衡**Nginx**。服务器端的负载均衡会维护一个可用的服务器清单，通过心跳来剔除不可用的服务端节点，当客户端的请求过来时，按照负载均衡算法选出一台服务器的地址进行转发。客户端负载均衡和服务器端负载均衡最大的不同就是维护的服务器清单保存的位置，在客户端负载均衡中，所有的客户端节点都要维护自己要访问的服务清单。这些服务的清单都是从注册中心获取的，比如Eureka。  
 ![Ribbon架构模型](img-folder/Ribbon架构模型.bmp)  
@@ -207,29 +212,29 @@ zuul:
 微服务意味着要将单体应用中的业务拆分成一个个子服务，每个服务的粒度相对较小，因此系统中出现大量的服务。由于每个服务都需要必要的配置信息才能运行，所以一套集中式的、动态的配置管理设施是必不可少的。SpringCloud提供了ConfigServer来解决这个问题，我们每个微服务自己带着一个application.yml，上百个配置文件就会.....o(╥﹏╥)o
 - 是什么  
      SpringCloud Config 为微服务架构中的微服务提供集中化的外部配置支持，配置服务器为各个不同微服务应用的所有环境提供了一个中心话的外部配置。  
-- 怎么玩  
+- 怎么用  
      SpringCloud Config分为服务端和客户端两部分。  
 - 两个服务 [**microservicecloud-config-3344**](https://github.com/yunlonglei/MicroServiceCloud/tree/master/microservicecloud-config-3344)和[**microservicecloud-config-client-3355**](https://github.com/yunlonglei/MicroServiceCloud/tree/master/microservicecloud-config-client-3355)  
 ### SpringCloud Config 架构图
-![SpringCloud Config 架构图](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+![SpringCloud Config 架构图](img-folder/SpringCloudConfig架构图.png)
 ### SpringCloudConfig 概述
-![SpringCloudConfig_概述](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloudConfig_%E6%A6%82%E8%BF%B0.png)  
+![SpringCloudConfig_概述](img-folder/SpringCloudConfig_概述.png)  
 服务端也称为分布式配置中心，它是一个独立的微服务Service，用来连接配置服务器并为客户端提获取配置信息，加密/解密信息等访问接口。  
 <br/>
 客户端则是通过指定的配置中心来管理应用资源，以及与业务相关的配置内容，并在启动的时候从配置中心获取才和加载配置信息，配置服务器默认采用git来存储配置信息，这样就有助于对环境配置进行版本管理，并且可以通过git客户端工具来方便管理和访问配置内容。  
 ### SpringCloud Config 服务端配置  
-主启动类config_3344_StartSpringCloudApp中加入[**@EnableConfigService**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/java/com/atguigu/springcloud/Config_3344_StartSpringCloudApp.java)  
-![SpringCloud Config 服务端配置](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE.png)  
+主启动类config_3344_StartSpringCloudApp中加入[**@EnableConfigService**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-config-3344/src/main/java/com/lei/springcloud/Config_3344_StartSpringCloudApp.java)  
+![SpringCloud Config 服务端配置](img-folder/SpringCloudConfig服务端配置.png)  
 - [**microservicecloud-config的新的Respository**](https://github.com/yunlonglei/microservicecloud-config)  
 - [**microservicecloud-config的新的Respository中的application.yml**](https://github.com/yunlonglei/microservicecloud-config/blob/master/application.yml)  
 ### SpringCloud Config 客户端配置与测试
-![**SpringCloud Config 客户端配置与测试**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%B5%8B%E8%AF%95.png)  
+![**SpringCloud Config 客户端配置与测试**](img-folder/SpringCloudConfig客户端配置与测试.png)  
 - [**microservicecloud-config的新的Respository中的microservicecloud-config-client.yml**](https://github.com/yunlonglei/microservicecloud-config/blob/master/microservicecloud-config-client.yml)  
 ### SpringCloud Config 配置实战
 在GitHub中上传和控制配置文件，让[**microservicecloud-config-3344**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/resources/application.yml)
 微服务连接到GitHub，[**microservicecloud-config-eureka-client-7001**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-eureka-client-7001/src/main/resources/bootstrap.yml)和[**microservicecloud-config-dept-client-8001**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-dept-client-8001/src/main/resources/bootstrap.yml)连接[**microservicecloud-config-3344**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/microservicecloud-config-3344/src/main/resources/application.yml)，
 再从这两个的bootstrap.yml配置文件中获取3344连接到的github的资源名称[**profile、label**](https://github.com/yunlonglei/microservicecloud-config/blob/master/microservicecloud-config-dept-client.yml)等。
-![**SpringCloud Config 配置实战**](https://github.com/yunlonglei/MicroServiceCloud/blob/master/img-folder/SpringCloud%20Config%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98.png)  
+![**SpringCloud Config 配置实战**](img-folder/SpringCloudConfig配置实战.png)  
 *正当的是由运维人员在GitHub上的配置文件中修改数据库连接，dev、test......中修改连接的库（Config_3344连接github，client-8001....连接3344从中取值）；这个里面为了方便，直接在GitHub上的配置文件中配好，然后在代码配置文件中修改连接的方式。  
 **参考文档：**  
 https://github.com/spring-cloud  
