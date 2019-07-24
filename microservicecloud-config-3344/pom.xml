@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.atguigu.springcloud</groupId>
+		<groupId>com.lei.springcloud</groupId>
 		<artifactId>microservicecloud</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -12,10 +12,17 @@
 
 
 	<dependencies>
+		<!-- Eureka客户端配置 -->
+		<!--<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>-->
 		<!-- springCloud Config -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-server</artifactId>
+			<version>2.1.0.RELEASE</version>
 		</dependency>
 		<!-- 避免Config的Git插件报错：org/eclipse/jgit/api/TransportConfigCallback -->
 		<dependency>
@@ -27,19 +34,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>2.1.6.RELEASE</version>
 		</dependency>
 		<!-- 熔断 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<version>2.1.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -57,6 +58,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>springloaded</artifactId>
+			<version>1.2.8.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
