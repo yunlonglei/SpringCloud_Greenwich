@@ -107,7 +107,8 @@
 		<module>microservicecloud-config-dept-client-8001</module>
 		<module>microservicecloud-admin-7010</module>
         <module>microservicecloud-consumer-ribbon-80</module>
-    </modules>
+		<module>microservicecloud-security-8010</module>
+	</modules>
 
 </project>
 
