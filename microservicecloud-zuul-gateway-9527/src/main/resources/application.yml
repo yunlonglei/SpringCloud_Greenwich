@@ -13,8 +13,8 @@ eureka:
     instance-id: gateway-9527.com
     prefer-ip-address: true
 info:
-  app.name: atguigu-microcloud
-  company.name: www.atguigu.com
+  app.name: lei-microcloud
+  company.name: www.lei.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
 

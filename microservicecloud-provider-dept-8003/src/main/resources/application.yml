@@ -33,8 +33,8 @@ eureka:
     prefer-ip-address: true     #访问路径可以显示IP地址
       
 info:
-  app.name: atguigu-microservicecloud
-  company.name: www.atguigu.com
+  app.name: lei-microservicecloud
+  company.name: www.lei.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
       
