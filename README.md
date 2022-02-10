@@ -30,9 +30,9 @@ microservicecloud-zuul-gateway-9527 |zuul路由网关|一个**独立**的对各�
 Spring Cloud 封装了 Netflix 公司开发的 Eureka 模块来实现服务注册和发现(请对比Zookeeper)。  
 Eureka 采用了 C-S 的设计架构。Eureka Server 作为服务注册功能的服务器，它是服务注册中心。   
 而系统中的其他微服务，使用 Eureka 的客户端连接到 Eureka Server并维持心跳连接。这样系统的维护人员就可以通过 Eureka Server 来监控系统中各个微服务是否正常运行。SpringCloud 的一些其他模块（比如Zuul）就可以通过 Eureka Server 来发现系统中的其他微服务，并执行相关的逻辑。
-- 请注意和Dubbo的架构对比
+- 请注意和Dubbo的架构对比：
 ![Dubbo和SpringCloud比较](img-folder/Dubbo和SpringCloud.png)  
-Eureka的基础架构：
+- Eureka的基础架构：
 ![Eureka的基本架构1](img-folder/Eureka的基本架构1.bmp)  
 ![Eureka的基本架构2](img-folder/Eureka的基本架构2.png)  
 - 原理讲解  
@@ -144,7 +144,7 @@ Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在�
  //@FeignClient(value = "MICROSERVICECLOUD-DEPT")//Fegin负载均衡用  
  //下面这个注解是服务降级Hystrix用，配合了Fegin       
  [**DeptClientService接口在注解@FeignClient**](https://github.com/yunlonglei/SpringCloud_Greenwich/blob/master/microservicecloud-api/src/main/java/com/lei/springcloud/service/DeptClientService.java)中添加`fallbackFactory`属性值!  
-**  千万记得打开断路器！！！**
+**千万记得打开断路器！！！**
 ```yaml
 feign:
   hystrix:
@@ -152,8 +152,8 @@ feign:
 ```
 ![服务降级](img-folder/服务降级.png)  
 服务熔断是由服务端实现，服务降级是由客户端实现。  
-  *服务降级Feign_80（客户端）调用-> api.service  
-  *服务熔断hystrix_8001（服务端）被 _80（客户端调用）  
+  * 服务降级Feign_80（客户端）调用-> api.service  
+  * 服务熔断hystrix_8001（服务端）被 _80（客户端调用）  
 
 ## 服务监控 hystrixDashboard  
 除了隔离依赖服务的调用以外，Hystrix还提供了准实时的调用监控（Hystrix Dashboard），Hystrix会持续地记录所有通过Hystrix发起的请求的执行信息，并以统计报表和图形的形式展示给用户，包括每秒执行多少请求多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控。Spring Cloud也提供了Hystrix Dashboard的整合，对监控内容转化成可视化界面。  
